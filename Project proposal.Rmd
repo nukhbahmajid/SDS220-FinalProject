@@ -74,7 +74,7 @@ What are the response variables? What are the units? Carefully define each varia
 Passing the Bechdel test (binary) (PASS/FAIL)
 Decade (ex: 90s, 2000s)
 Director's gender (male/female)
-Movie genre (Comedy, Action, Drama, Documentary, Other)
+Movie genre (Comedy, Action, Drama, Other)
 Budget (USD, adjusted for inflation around dollar value in 2013)
 
 Describe the expanatory variables that you will use (i.e.  the columns of the data frame).  Carefully define each variable and describe how each was measured.  For categorical variables,  list  the  possible  categories;  for  quantitative  variables,  specify  the units of measurement.  
