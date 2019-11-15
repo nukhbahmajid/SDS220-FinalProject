@@ -1,0 +1,61 @@
+
+---
+title: "Data Proposal"
+author: "Your names here"
+date: "May 1, 2019"
+output: 
+  html_document:
+    code_folding: hide
+    df_print: kable
+---
+
+note- do not change any part of the above after the `output` line! You will be able to add to this R Markdown document to do your analyses, and for your final project. I suggest you keep the headers provided here in this document, fill in your answers to the instructions, then delete the instructions. 
+
+# Title here 
+
+**Group members:** List Group Members' Names Here
+
+*** 
+
+## Purpose 
+
+Describe the general topic/phenomenon you want to study
+
+List some focused questions that you hope to answer and general hypotheses that you intend to assess.
+
+***
+
+## The Data 
+
+Describe the data that you plan to use, with specifications of where it can be found (URL) and a short description. Eventually, you will probably want to combine data from multiple sources into one file.  We will discuss  data  management  techniques  in  the  coming  weeks,  but  for  now you should simply list multiple sources if you have them. 
+
+You can put a URL to your data in like [so](https://www.google.com/publicdata/directory). (This is a link to Google's data set search feature!)
+
+If you are ready to try to load your data into R, [here are instructions for doing so](https://twitter.com/rudeboybert/status/1055821833512071168). These instructions show you how to publish your data to the web, so that you can easily read it in with the following code, You need to remove the # from the front of the `dat <- read_csv()` code, and put the url into the quotation marks: 
+
+```{r}
+library(readr)
+
+#dat <- read_csv("url of your published data set here")
+```
+
+You do not need to read in your data for the project proposal...this is just if you are ready and this helps you to look at it!
+
+
+
+### Population  
+
+Specify what the cases are (i.e.  the rows of the data frame), describe the larger population/phenomenon to which you will try to generalize,  and (if appropriate) estimate roughly how many such individuals there are in the population.
+
+### Response Variables
+What are the response variables? What are the units? Carefully define each variable and describe how each was measured. Estimate the range of possible values these variables may take on.  
+
+> Note that you need to have at least 2 quantitative response variables
+
+### Explanatory Variables
+
+Describe the expanatory variables that you will use (i.e.  the columns of the data frame).  Carefully define each variable and describe how each was measured.  For categorical variables,  list  the  possible  categories;  for  quantitative  variables,  specify  the units of measurement.  
+
+> Note on variables and cases: You need to have enough data to make meaningful inferences. There is no magic number of cases required for all projects. But aim for at least 100 cases and make sure there are at least 30 cases in each category of each of your categorical variables. Further, you will need to have at least 6 quantiative and 2 categorcal variables (If you only have quantitative variables, we can turn those into categorical, but remember that the reverse does not work)
+
+***
