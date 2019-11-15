@@ -1,0 +1,25 @@
+---
+title: "Project Prototype"
+author: "Nukhbah Majid"
+date: "10/20/2019"
+output: 
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(tidyverse)
+library(fivethirtyeight)
+```
+
+```{r}
+bechdel <- bechdel
+bechdel <- bechdel %>%
+  filter(year >= 1980)
+```
+
