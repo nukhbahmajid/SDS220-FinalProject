@@ -1,0 +1,25 @@
+---
+title: "Budget, adjusted for inflation"
+author: "Madeleine Hickman"
+date: "11/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(readr)
+```
+
+```{r}
+ggplot(data = bechdelSample, aes(y = budget_2013)) +
+  geom_boxplot(fill = "royalblue") + 
+  labs(y = "Adjusted budget (USD)", 
+       title = "Movie budgets, adjusted for inflation to the 2013 USD")
+```
+
+
