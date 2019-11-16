@@ -1,0 +1,60 @@
+---
+title: "DomGross&IntGrossVisual"
+author: "Christian Madrigal"
+date: "11/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Variable 1: Domestic Gross Income Compared to Decade Code 
+
+### summary statistics 
+
+```{r}
+bechdelSample %>%
+  summarize(M_dom = mean(domgross_2013, na.rm=TRUE), 
+            Mdn_dom = median(domgross_2013, na.rm=TRUE),
+            q_1 = quantile(domgross_2013, 0.25,na.rm=TRUE),
+            q_3 = quantile(domgross_2013, 0.75, na.rm=TRUE),
+            sample_size = n())
+```
+
+
+
+### data visualizations
+
+```{r}
+ggplot(data = bechdelSample, aes(x =, y = domgross_2013 )) +
+  geom_boxplot(fill = "orange") +labs(y="Domestic Gross Income (USD 2013)")
+```
+
+The domestic gross income, adjusted for 2013 USD, is very skewed to the right. The sample of 200 movies clearly demonstrates that there were over 5 cases that made over 20,000,000 USD in domestic gross income. There are also over 8 cases that are outliers in comparison to the other cases and they are the ones that are visually represented as dots outside of the boxplot. There are two cases, that did not have information on the domestic gross income, therefore this visualization is specifically showing data on 198 cases.
+
+
+***
+
+## Variable 2: International Gross Income
+
+### summary statistics 
+
+```{r}
+bechdelSample %>%
+  summarize(M_int = mean(intgross_2013, na.rm=TRUE), 
+            Mdn_int = median(intgross_2013, na.rm=TRUE),
+            q_1 = quantile(intgross_2013, 0.25,na.rm=TRUE),
+            q_3 = quantile(intgross_2013, 0.75, na.rm=TRUE),
+            sample_size = n())
+```
+
+
+### data visualizations
+
+```{r}
+ggplot(data = bechdelSample, aes(x =, y = intgross_2013 )) +
+  geom_boxplot(fill = "maroon") +labs(y="International Gross Income (USD 2013)")
+```
+
+This visualization is showing the international gross income adjusted to 2013 USD for the sample of 200 movies. It is clear that that the data is skewed to the right and this is highlighted by the outliers on the boxplot which represent movies that made over 50,000,000 in international gross income when they were released. Note: there was one case that did not have information on international gross income, therefore this visualization is showing data on 199 cases. 
