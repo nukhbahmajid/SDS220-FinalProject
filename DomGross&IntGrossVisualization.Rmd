@@ -1,0 +1,112 @@
+<<<<<<< HEAD
+
+---
+title: "Data Appendix"
+author: "Your names here"
+date: "Put the date here"
+output: 
+  html_document:
+    code_folding: hide
+    df_print: kable
+---
+
+#Due November 15 11:55pm on Moodle
+
+note- do not change any part of the above after the `output` line! This time you can add to the R Markdown document you started with your project proposal to bring in the data, and to add a section for your data exploration. __Be sure  to have purpose, data, population, response variables, explanatory variables sections (which are from the initial proposal) reflect the comments that Miles made on your initial proposal.__
+
+
+```{r message = FALSE, warning = FALSE}
+# you may need to add more packages here
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(tidyverse)
+```
+
+
+# Data exploration
+
+Once you have loaded in your data, You will create visualizations and summary statistics for each variable that you are interested in including in your project. __Do not do this for every variable in your data set__, just the variables you intend to use in your project.  
+
+* Be sure to note missing values, unusual values, or other notable features of your data for each variable.  
+
+* For each visualization or summary  statistic,  describe  in  words  what  the  visualization  or  summary  statistic tells us about that variable. For quantitative variables: are they skewed or symmetric? Are there outliers?
+
+* Be sure you include data tables or a visualization showing the sample size for each level of your categorical variables (look back to the `group_by()` and `summarize()` examples in lab 5 & 6 and in the project tips file. 
+
+* You will probably need to do some data wrangling at this phase of the project. Please see the project tips file on Moodle to help with assessing missing values, and some common data wranging tasks! 
+
+* A tip: be sure to take a `glimpse()` of your data to check that the variables you **think** are quantitative are actually being treated as quantitative variables in R, and that you **think** are numeric are actually being treated as numeric in R.
+
+```{r results = "hide"}
+#glimpse()
+```
+
+
+```{r}
+# put your data wrangling code here - be sure to make notes to yourself about what you are doing in each step!
+
+```
+
+
+
+## Variable 1: Domestic Gross Income Compared to Decade Code 
+
+### summary statistics 
+
+```{r}
+bechdelSample %>%
+  summarize(M_dom = mean(domgross_2013, na.rm=TRUE), 
+            Mdn_dom = median(domgross_2013, na.rm=TRUE),
+            q_1 = quantile(domgross_2013, 0.25,na.rm=TRUE),
+            q_3 = quantile(domgross_2013, 0.75, na.rm=TRUE),
+            sample_size = n())
+```
+
+
+
+### data visualizations
+
+```{r}
+ggplot(data = bechdelSample, aes(x =, y = domgross_2013 )) +
+  geom_boxplot(fill = "orange") +labs(y="Domestic Gross Income (USD 2013)")
+```
+
+The domestic gross income, adjusted for 2013 USD, is very skewed to the right. The sample of 200 movies clearly demonstrates that there were over 5 cases that made over 20,000,000 USD in domestic gross income. There are also over 8 cases that are outliers in comparison to the other cases and they are the ones that are visually represented as dots outside of the boxplot. There are two cases, that did not have information on the domestic gross income, therefore this visualization is specifically showing data on 198 cases.
+
+
+***
+
+## Variable 2: International Gross Income
+
+### summary statistics 
+
+```{r}
+bechdelSample %>%
+  summarize(M_int = mean(intgross_2013, na.rm=TRUE), 
+            Mdn_int = median(intgross_2013, na.rm=TRUE),
+            q_1 = quantile(intgross_2013, 0.25,na.rm=TRUE),
+            q_3 = quantile(intgross_2013, 0.75, na.rm=TRUE),
+            sample_size = n())
+```
+
+
+### data visualizations
+
+```{r}
+ggplot(data = bechdelSample, aes(x =, y = intgross_2013 )) +
+  geom_boxplot(fill = "maroon") +labs(y="International Gross Income (USD 2013)")
+```
+
+This visualization is showing the international gross income adjusted to 2013 USD for the sample of 200 movies. It is clear that that the data is skewed to the right and this is highlighted by the outliers on the boxplot which represent movies that made over 50,000,000 in international gross income when they were released. Note: there was one case that did not have information on international gross income, therefore this visualization is showing data on 199 cases. 
+
+
+
+***
+
+##Repeat above for each variable you will actually analyze
+
+__Only include the variables that you intend to use in your project__
+
+
+
