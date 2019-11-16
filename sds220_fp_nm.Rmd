@@ -20,6 +20,17 @@ library(fivethirtyeight)
 ```{r}
 bechdel <- bechdel
 bechdel <- bechdel %>%
-  filter(year >= 1980)
+  filter(year >= 1990)
+```
+
+```{r}
+set.seed(33)
+sample1 <- sample_n(bechdel, 200)
+```
+
+
+```{r}
+# Write the data to an excel file
+write_csv(bechdel, 'bechdelSample.csv', col_names = TRUE)
 ```
 
