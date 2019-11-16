@@ -1,0 +1,39 @@
+---
+title: "Unknown_Data_Summary_Stats_Data_Visualization"
+author: "Madeleine Hickman"
+date: "11/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Opening weekend sales: quantitative (what year $ is this in?)
+IMDB Score: quantitative
+Decade: categorical (80s, 90s or 00s)
+		Director gender: categorical (male or female)
+		Genre: categorical (comedy, action, drama, other)
+
+
+The "bechdelSample" data set we are using doesn't contain very many variables, so we are adding 5 new variables, three of which are categorical and two of which are quantitative. 
+
+We are hoping to explore the question of representation of women in Hollywood through examining different features of popular films released, and we are hoping these new variables will teach us things about what might influence the way women are portrayed in film. 
+
+Categorical variables we are adding: 
+
+  - director_gender : 
+       This variable will be a categorical, binary variable with 2 categories: 0 for male directors and 1 for       female directors. We can look at the proportion of directors that are female. 
+  - genre: 
+        This varibale will be a categorical variable with 4 categories: comedy, action, drama, and other. We          can look at how many of our observations fall into each category. 
+  - decade: 
+        This varibale will be a categorical variable with 4 categories: 80s, 90s, 00s, and 10s. We can, at            this stage of the project, look at the proportion of movies in each category. Further down the line we         can explore trends of different variables over time with this category. 
+        
+Quantitative variables we are adding: 
+
+  - IMDB_score: 
+        This variable will be a quantitative variable with values ranging from 0.0 to 10.0, with the value            representing the IMDB user rating given to the film. We can look at the average and median values for         this variable and also max and min values. 
+  - opening_weekend:
+        This variable would contain the numerical value for the opening weekend sales for each movie. We could         look at the 5-number summary for this variable to look at generally how successful the movies were in         their opening weekends. One limitation of this data is that it will not be adjusted for inflation, so         it will be difficult for us to compare this variable with the other quantitative variables that are           measured in USD, or to make generalizations about this variable in relation to the other conclusions          we will be drawing about our data. 
+        
+    
