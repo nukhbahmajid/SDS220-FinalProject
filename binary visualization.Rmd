@@ -1,0 +1,15 @@
+---
+title: "binary visualization"
+author: "Annabel Shein"
+date: "11/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+view(bechdelSample)
+```
+
