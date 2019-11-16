@@ -10,6 +10,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-view(bechdelSample)
+bechdelSample %>%
+  group_by(binary) %>%
+  summarize(sample_size = n())
+```
+
+```{r}
+ggplot(data = bechdelSample,  aes(x = binary)) +
+  geom_bar()+labs(x="Passing or Failing the Bechdel Test", title="Count of movies passing or failing the Bechdel test")
 ```
 
