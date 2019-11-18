@@ -53,6 +53,11 @@ Once you have loaded in your data, You will create visualizations and summary st
 ## Variable 1: Domestic Gross Income Compared to Decade Code 
 
 ### summary statistics 
+```{r}
+bechdelSample<-bechdelSample
+```
+
+
 
 ```{r}
 bechdelSample %>%
@@ -68,11 +73,11 @@ bechdelSample %>%
 ### data visualizations
 
 ```{r}
-ggplot(data = bechdelSample, aes(x =, y = domgross_2013 )) +
-  geom_boxplot(fill = "orange") +labs(y="Domestic Gross Income (USD 2013)")
+ggplot(data = bechdelSample, aes(x = domgross_2013))+ 
+  geom_histogram(fill="purple") + labs(x="2013 USD", y="Count", title="Domestic Gross Income adjusted for 2013 USD")
 ```
 
-The domestic gross income, adjusted for 2013 USD, is very skewed to the right. The sample of 200 movies clearly demonstrates that there were over 5 cases that made over 20,000,000 USD in domestic gross income. There are also over 8 cases that are outliers in comparison to the other cases and they are the ones that are visually represented as dots outside of the boxplot. There are two cases, that did not have information on the domestic gross income, therefore this visualization is specifically showing data on 198 cases.
+The domestic gross income, adjusted for 2013 USD, is very skewed to the right. The sample of 200 movies clearly demonstrates that there were over 50 cases that made over 20,000,000 USD in domestic gross income. There are also several cases that are outliers in comparison to the other cases and they are the ones that are visually represented on the right of the histogram. There are two cases, that did not have information on the domestic gross income, therefore this visualization is specifically showing data on 198 cases.
 
 
 ***
@@ -94,19 +99,16 @@ bechdelSample %>%
 ### data visualizations
 
 ```{r}
-ggplot(data = bechdelSample, aes(x =, y = intgross_2013 )) +
-  geom_boxplot(fill = "maroon") +labs(y="International Gross Income (USD 2013)")
+ggplot(data = bechdelSample, aes(x = intgross_2013))+ 
+  geom_histogram(fill="sienna")+ labs(x="2013 USD", y="Count", title="International Gross Income adjusted for 2013 USD")
 ```
 
-This visualization is showing the international gross income adjusted to 2013 USD for the sample of 200 movies. It is clear that that the data is skewed to the right and this is highlighted by the outliers on the boxplot which represent movies that made over 50,000,000 in international gross income when they were released. Note: there was one case that did not have information on international gross income, therefore this visualization is showing data on 199 cases. 
+This visualization is showing the international gross income adjusted to 2013 USD for the sample of 200 movies. It is clear that the data is skewed to the right and this is highlighted by the outliers on the histogram which represent movies that made over 2,000,000,000 in international gross income when they were released. Note: there was one case that did not have information on international gross income, therefore this visualization is showing data on 199 cases. 
 
 
 
 ***
 
-##Repeat above for each variable you will actually analyze
-
-__Only include the variables that you intend to use in your project__
 
 
 
