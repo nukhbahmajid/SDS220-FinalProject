@@ -31,6 +31,25 @@ sample1 <- sample_n(bechdel, 200)
 
 ```{r}
 # Write the data to an excel file
-write_csv(bechdel, 'bechdelSample.csv', col_names = TRUE)
+write_csv(sample1, 'bechdelSample.csv', col_names = TRUE)
 ```
+
+```{r}
+sample1 %>%
+  summarise(mean = mean(domgross, na.rm = TRUE))
+```
+
+```{r}
+try1 <- sample1 %>%
+  group_by(year) %>%
+  mutate(total = n()) %>%
+  group_by(year, binary) %>%
+  mutate(passNum = ifelse(binary == "PASS", n(), total-n() ) )
+```
+
+```{r}
+ggplot(try1, aes(y= passNum, x = year))+
+  geom_line()
+```
+
 
