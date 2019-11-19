@@ -1,0 +1,46 @@
+---
+title: "Budget, adjusted for inflation"
+author: "Madeleine Hickman"
+date: "11/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(readr)
+```
+
+```{r}
+bechdelSample %>%
+  summarize( min_budget = min(budget_2013),
+            Mdn_budget = median(budget_2013),
+            M_budget = mean(budget_2013),
+            q_50_budget = quantile(budget_2013, 0.5),
+            max_budget = max(budget_2013), 
+            sample_size = n())
+```
+
+```{r}
+ggplot(data = bechdelSample, aes(y = budget_2013)) +
+  geom_boxplot(fill = "royalblue") + 
+  labs(y = "Adjusted budget (USD)", 
+       title = "Movie budgets, adjusted for inflation to the 2013 USD")
+```
+
+```{r}
+ggplot(data = bechdelSample, aes(x = budget_2013))+ 
+  geom_histogram(fill = "royalblue") + 
+  labs(x = "Adjusted budget (USD)", 
+       title = "Movie budgets, adjusted for inflation to the 2013 USD")
+```
+
+
+This variable, buget_2013, looks at the budgets for each film in our dataset. The values are adjusted for inflation, according to the value of the USD in 2013. 
+
+As all of these movies had to be well-known in order to be chosen for this test, the budgets are all relatively high, with the minimum value sitting at 371291 USD. Our summary statistics and our data visualization for this variable show us that the budgets for these movies are right-skewed, meaning there are a couple movies with extremely large budgets. Because our data is skewed in this way, the mean is pulled upwards by these high budgets, coming in at 58816959 USD, making it much larger than our median budget, which is 38452161 USD. 
+

@@ -1,0 +1,34 @@
+---
+title: "binary visualization"
+author: "Annabel Shein"
+date: "11/16/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(oilabs)
+```
+
+
+# Variable 1: Binary
+
+This can be either an expanatory or a response variable, and it is catergorical (PASS/FAIL).
+
+```{r}
+bechdelSample %>%
+  group_by(binary) %>%
+  summarize(sample_size = n())
+```
+
+```{r}
+ggplot(data = bechdelSample,  aes(x = binary)) +
+  geom_bar()+labs(x="Passing or Failing the Bechdel Test", title="Count of movies passing or failing the Bechdel test")
+```
+
+Binary is a catergorical variable. The sample sizes of the pass/fail groups are shown above, as well as a bar plot comparing the number of movies passing and failing the Bechdel test. The summary statistics table and the data visualization both show that within this sample, more movies fail the Bechdel test than pass, 122 and 78, respectively. There are no missing smaples.
