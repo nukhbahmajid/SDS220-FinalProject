@@ -40,7 +40,7 @@ sample1 %>%
 ```
 
 ```{r}
-try1 <- sample1 %>%
+testBechdel <- sample1 %>%
   group_by(year) %>%
   mutate(total = n()) %>%
   group_by(year, binary) %>%
@@ -48,7 +48,7 @@ try1 <- sample1 %>%
 ```
 
 ```{r}
-ggplot(try1, aes(x= test))+
+ggplot(testBechdel, aes(x= test))+
   geom_bar(fill = "skyblue") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```

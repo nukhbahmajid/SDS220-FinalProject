@@ -62,13 +62,14 @@ International gross (USD, adjusted for inflation around dollar value in 2013)
 
 
 
+
 ### Explanatory Variables
 Passing the Bechdel test (binary) (PASS/FAIL)
 Decade (ex: 90s, 2000s)
 Director's gender (male/female)
 Movie genre (Comedy, Action, Drama, Other)
 Budget (USD, adjusted for inflation around dollar value in 2013)
-
+Test (notalk, men, ok, dubious, nowomen)
 
 ##Data Exploration
 
