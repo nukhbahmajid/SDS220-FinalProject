@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 ---
 title: "Data Appendix"
@@ -69,3 +70,122 @@ Once you have loaded in your data, You will create visualizations and summary st
 
 __Only include the variables that you intend to use in your project__
 
+=======
+
+---
+title: "Data Appendix"
+author: "Your names here"
+date: "Put the date here"
+output: 
+  html_document:
+    code_folding: hide
+    df_print: kable
+---
+
+#Due November 15 11:55pm on Moodle
+
+note- do not change any part of the above after the `output` line! This time you can add to the R Markdown document you started with your project proposal to bring in the data, and to add a section for your data exploration. __Be sure  to have purpose, data, population, response variables, explanatory variables sections (which are from the initial proposal) reflect the comments that Miles made on your initial proposal.__
+
+
+```{r message = FALSE, warning = FALSE}
+# you may need to add more packages here
+library(dplyr)
+library(ggplot2)
+library(readr)
+```
+
+# Title here 
+
+**Group members:**  blah 
+
+*** 
+
+## Purpose 
+
+Describe the general topic/phenomenon you want to study, as well as some focused questions and hypotheses. 
+
+***
+
+## The Data 
+
+Describe the data that you plan to use, with specifications of where it can be found (URL) and a short description. Eventually, you will probably want to combine data from multiple sources into one file.  We will discuss  data  management  techniques  in  the  coming  weeks,  but  for  now you should simply list multiple sources if you have them. 
+
+You can put a URL to your data in like [so](https://www.google.com/publicdata/directory). (This is a link to Google's data set search feature!)
+
+If you are ready to try to load your data into R, [here are instructions for doing so](https://twitter.com/rudeboybert/status/1055821833512071168). These instructions show you how to publish your data to the web, so that you can easily read it in with the following code, You need to remove the # from the front of the `dat <- read_csv()` code, and put the url into the quotation marks: 
+
+```{r}
+library(readr)
+
+#dat <- read_csv("url of your published data set here")
+```
+
+You do not need to read in your data for the project proposal...this is just if you are ready and this helps you to look at it!
+
+
+
+### Population  
+
+Specify what the cases are (i.e.  the rows of the data frame), describe the larger population/phenomenon to which you will try to generalize,  and (if appropriate) estimate roughly how many such individuals there are in the population.
+
+### Response Variables
+What are the response variables? What are the units? Carefully define each variable and describe how each was measured. Estimate the range of possible values these variables may take on.  
+
+> Note that you need to have at least 2 quantitative response variables
+
+### Explanatory Variables
+
+Describe the expanatory variables that you will use (i.e.  the columns of the data frame).  Carefully define each variable and describe how each was measured.  For categorical variables,  list  the  possible  categories;  for  quantitative  variables,  specify  the units of measurement.  
+
+> Note on variables and cases: You need to have enough data to make meaningful inferences. There is no magic number of cases required for all projects. But aim for at least 100 cases and make sure there are at least 30 cases in each category of each of your categorical variables. Further, you will need to have at least 6 quantiative and 2 categorcal variables (If you only have quantitative variables, we can turn those into categorical, but remember that the reverse does not work)
+
+***
+
+# Data exploration
+
+Once you have loaded in your data, You will create visualizations and summary statistics for each variable that you are interested in including in your project. __Do not do this for every variable in your data set__, just the variables you intend to use in your project.  
+
+* Be sure to note missing values, unusual values, or other notable features of your data for each variable.  
+
+* For each visualization or summary  statistic,  describe  in  words  what  the  visualization  or  summary  statistic tells us about that variable. For quantitative variables: are they skewed or symmetric? Are there outliers?
+
+* Be sure you include data tables or a visualization showing the sample size for each level of your categorical variables (look back to the `group_by()` and `summarize()` examples in lab 5 & 6 and in the project tips file. 
+
+* You will probably need to do some data wrangling at this phase of the project. Please see the project tips file on Moodle to help with assessing missing values, and some common data wranging tasks! 
+
+* A tip: be sure to take a `glimpse()` of your data to check that the variables you **think** are quantitative are actually being treated as quantitative variables in R, and that you **think** are numeric are actually being treated as numeric in R.
+
+```{r results = "hide"}
+#glimpse()
+```
+
+
+```{r}
+# put your data wrangling code here - be sure to make notes to yourself about what you are doing in each step!
+
+```
+
+
+## Variable 1: Name of variable is it response or explanatory, categorical or quantitative?
+
+### summary statistics 
+
+
+### data visualizations
+
+
+***
+
+## Variable 2: Name of variable is it response or explanatory, categorical or quantitative?
+
+### summary statistics 
+
+### data visualizations
+
+***
+
+##Repeat above for each variable you will actually analyze
+
+__Only include the variables that you intend to use in your project__
+
+>>>>>>> 23b04980ff9200fbe2a7221fce212e66ca54d4c0
