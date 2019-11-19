@@ -1,9 +1,3 @@
----
-title: "Data Appendix"
-author: "Annabel Shein"
-date: "11/18/2019"
-output: html_document
----
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -11,8 +5,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ---
 title: "Data Appendix"
-author: Madeleine Hickman, Christian Madrigal, Nukhbah Majid, Annabel Shein
-date: November 18, 2019
+author: "Madeleine Hickman, Christian Madrigal, Nukhbah Majid, Annabel Shein""
+date: "November 18, 2019""
 output: 
   html_document:
     code_folding: hide
@@ -74,3 +68,141 @@ Decade (ex: 90s, 2000s)
 Director's gender (male/female)
 Movie genre (Comedy, Action, Drama, Other)
 Budget (USD, adjusted for inflation around dollar value in 2013)
+
+
+##Data Exploration
+
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(oilabs)
+```
+
+```{r}
+bechdelSample %>% 
+  mutate(domgross_2013_mil = domgross_2013/1000000, intgross_2013_mil = intgross_2013/1000000, budget_2013_mil = budget_2013/1000000)
+```
+
+
+# Variable 1: Binary
+
+### summary statistics 
+
+This can be either an expanatory or a response variable, and it is catergorical (PASS/FAIL).
+
+```{r}
+bechdelSample %>%
+  group_by(binary) %>%
+  summarize(sample_size = n())
+```
+
+### data visualizations
+
+```{r}
+ggplot(data = bechdelSample,  aes(x = binary)) +
+  geom_bar()+labs(x="Passing or Failing the Bechdel Test", title="Count of movies passing or failing the Bechdel test")
+```
+
+Binary is a catergorical variable. The sample sizes of the pass/fail groups are shown above, as well as a bar plot comparing the number of movies passing and failing the Bechdel test. The summary statistics table and the data visualization both show that within this sample, more movies fail the Bechdel test than pass, 122 and 78, respectively. There are no missing samples.
+
+#Variable 2: Budget
+
+### summary statistics 
+
+```{r}
+bechdelSample %>%
+  summarize(min_budget = min(budget_2013),
+            Mdn_budget = median(budget_2013),
+            M_budget = mean(budget_2013),
+            q_50_budget = quantile(budget_2013, 0.5),
+            max_budget = max(budget_2013), 
+            sample_size = n())
+```
+
+### data visualizations
+
+```{r}
+ggplot(data = bechdelSample, aes(x = budget_2013))+ 
+  geom_histogram(fill = "royalblue") + 
+  labs(x = "Adjusted budget (USD)", 
+       title = "Movie budgets, adjusted for inflation to the 2013 USD")
+```
+
+This variable, buget_2013, looks at the budgets for each film in our dataset. The values are adjusted for inflation, according to the value of the USD in 2013. 
+
+As all of these movies had to be well-known in order to be chosen for this test, the budgets are all relatively high, with the minimum value sitting at 371291 USD. Our summary statistics and our data visualization for this variable show us that the budgets for these movies are right-skewed, meaning there are a couple movies with extremely large budgets. Because our data is skewed in this way, the mean is pulled upwards by these high budgets, coming in at 58816959 USD, making it much larger than our median budget, which is 38452161 USD. 
+
+
+## Variable 3: Domestic Gross Income
+
+### summary statistics 
+
+```{r}
+bechdelSample %>%
+  summarize(M_dom = mean(domgross_2013, na.rm=TRUE), 
+            Mdn_dom = median(domgross_2013, na.rm=TRUE),
+            q_1 = quantile(domgross_2013, 0.25,na.rm=TRUE),
+            q_3 = quantile(domgross_2013, 0.75, na.rm=TRUE),
+            sample_size = n())
+```
+
+### data visualizations
+
+```{r}
+ggplot(data = bechdelSample, aes(x = domgross_2013))+ 
+  geom_histogram(fill="purple") + labs(x="2013 USD", y="Count", title="Domestic Gross Income adjusted for 2013 USD")
+```
+
+The domestic gross income, adjusted for 2013 USD, is very skewed to the right. The sample of 200 movies clearly demonstrates that there were over 50 cases that made over 20,000,000 USD in domestic gross income. There are also several cases that are outliers in comparison to the other cases and they are the ones that are visually represented on the right of the histogram. There are two cases, that did not have information on the domestic gross income, therefore this visualization is specifically showing data on 198 cases.
+
+
+***
+
+## Variable 4: International Gross Income
+
+### summary statistics 
+
+```{r}
+bechdelSample %>%
+  summarize(M_int = mean(intgross_2013, na.rm=TRUE), 
+            Mdn_int = median(intgross_2013, na.rm=TRUE),
+            q_1 = quantile(intgross_2013, 0.25,na.rm=TRUE),
+            q_3 = quantile(intgross_2013, 0.75, na.rm=TRUE),
+            sample_size = n())
+```
+
+
+### data visualizations
+
+```{r}
+ggplot(data = bechdelSample, aes(x = intgross_2013))+ 
+  geom_histogram(fill="sienna")+ labs(x="2013 USD", y="Count", title="International Gross Income adjusted for 2013 USD")
+
+```
+
+This visualization is showing the international gross income adjusted to 2013 USD for the sample of 200 movies. It is clear that the data is skewed to the right and this is highlighted by the outliers on the histogram which represent movies that made over 2,000,000,000 in international gross income when they were released. Note: there was one case that did not have information on international gross income, therefore this visualization is showing data on 199 cases. 
+
+##Variables 5-9
+
+The "bechdelSample" data set we are using doesn't contain very many variables, so we are adding 5 new variables, three of which are categorical and two of which are quantitative. 
+
+We are hoping to explore the question of representation of women in Hollywood through examining different features of popular films released, and we are hoping these new variables will teach us things about what might influence the way women are portrayed in film. 
+
+Categorical variables we are adding: 
+
+  - director_gender : 
+       This variable will be a categorical, binary variable with 2 categories: 0 for male directors and 1 for female directors. We can look at the proportion of directors that are female. 
+  - genre: 
+        This varibale will be a categorical variable with 4 categories: comedy, action, drama, and other. We can look at how many of our observations fall into each category. 
+  - decade: 
+        This varibale will be a categorical variable with 4 categories: 80s, 90s, 00s, and 10s. We can, at this stage of the project, look at the proportion of movies in each category. Further down the line we can explore trends of different variables over time with this category. 
+        
+Quantitative variables we are adding: 
+
+  - IMDB_score: 
+        This variable will be a quantitative variable with values ranging from 0.0 to 10.0, with the value representing the IMDB user rating given to the film. We can look at the average and median values for this variable and also max and min values. 
+  - opening_weekend:
+        This variable would contain the numerical value for the opening weekend sales for each movie. We could look at the 5-number summary for this variable to look at generally how successful the movies were in their opening weekends. One limitation of this data is that it will not be adjusted for inflation, so it will be difficult for us to compare this variable with the other quantitative variables that are measured in USD, or to make generalizations about this variable in relation to the other conclusions we will be drawing about our data. 
+        
+    
