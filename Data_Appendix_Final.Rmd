@@ -1,0 +1,76 @@
+---
+title: "Data Appendix"
+author: "Annabel Shein"
+date: "11/18/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+title: "Data Appendix"
+author: Madeleine Hickman, Christian Madrigal, Nukhbah Majid, Annabel Shein
+date: November 18, 2019
+output: 
+  html_document:
+    code_folding: hide
+    df_print: kable
+---
+
+#Due November 15 11:55pm on Moodle
+
+note- do not change any part of the above after the `output` line! This time you can add to the R Markdown document you started with your project proposal to bring in the data, and to add a section for your data exploration. __Be sure  to have purpose, data, population, response variables, explanatory variables sections (which are from the initial proposal) reflect the comments that Miles made on your initial proposal.__
+
+
+```{r message = FALSE, warning = FALSE}
+# you may need to add more packages here
+library(dplyr)
+library(ggplot2)
+library(readr)
+```
+
+# Bechdel Test
+
+**Group members:**   Madeleine Hickman, Christian Madrigal, Nukhbah Majid, Annabel Shein 
+
+*** 
+
+## Purpose 
+
+The Bechdel test is a measure of representation of women in fiction, and is used a lot for movies. A movie passes the Bechdel test if two women talk to each other about something other than a man, and sometimes the requirement that the women are named is added as well. We want to see trends in gender representation in movies across genre and decade and if there is a relationship in how well the movies do financially and if they pass the Bechdel test.
+
+Some questions we have:
+- Does the number of movies passing the Bechdel test change over time?
+- Which genre of movie has the most movies that pass the Bechdel test?
+- Does the gender of the director affect whether or not the movie passes the Bechdel test?
+- Is there a relationship between the movie passing the Bechdel test and how much money the movie makes?
+
+***
+
+## The Data 
+
+The data we plan to use is from the Fivethirtyeight library on R, the dataset is called Bechdel. This dataset has 1794 cases, which are movies form 1970 to 2013. We plan to exclude all  movies released prior to 1990 and use a random sample of 200 movies from this dataset. The Bechdel dataset is made up of movies that Fivethirtyeight analyzed, using data they collected form other sources. We are assuming that these movies were randomly drawn from all movies that were released from that time period for the sake of our project, but we know that this assumption probably won't stand.  
+
+
+### Population  
+
+The cases in our dataset are 200 movies, randomly sampled from our original dataset of movies released between 1990 and 2013. The population we are generalizing to is popular movies released between 1990 and 2013. We roughly estimate the population size to be 13,800 movies.
+
+
+
+### Response Variables
+
+Passing the Bechdel test (binary) (PASS/FAIL)
+Domestic gross (USD, adjusted for inflation around dollar value in 2013)
+International gross (USD, adjusted for inflation around dollar value in 2013)
+
+
+
+### Explanatory Variables
+Passing the Bechdel test (binary) (PASS/FAIL)
+Decade (ex: 90s, 2000s)
+Director's gender (male/female)
+Movie genre (Comedy, Action, Drama, Other)
+Budget (USD, adjusted for inflation around dollar value in 2013)
