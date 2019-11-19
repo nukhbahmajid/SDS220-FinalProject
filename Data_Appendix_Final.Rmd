@@ -1,17 +1,18 @@
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ---
 title: "Data Appendix"
-author: "Madeleine Hickman, Christian Madrigal, Nukhbah Majid, Annabel Shein""
-date: "November 18, 2019""
+author: "Madeleine Hickman, Christian Madrigal, Nukhbah Majid, Annabel Shein"
+date: "November 18, 2019"
 output: 
   html_document:
     code_folding: hide
     df_print: kable
 ---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 #Due November 15 11:55pm on Moodle
 
@@ -23,7 +24,14 @@ note- do not change any part of the above after the `output` line! This time you
 library(dplyr)
 library(ggplot2)
 library(readr)
+library(fivethirtyeight)
 ```
+
+
+```{r, message=FALSE}
+bechdelSample <- read_csv("bechdelSample.csv")
+```
+
 
 # Bechdel Test
 
@@ -125,7 +133,7 @@ bechdelSample %>%
 
 ```{r}
 ggplot(data = bechdelSample, aes(x = budget_2013))+ 
-  geom_histogram(fill = "royalblue") + 
+  geom_histogram(fill = "royalblue", color = "black") + 
   labs(x = "Adjusted budget (USD)", 
        title = "Movie budgets, adjusted for inflation to the 2013 USD")
 ```
@@ -152,7 +160,7 @@ bechdelSample %>%
 
 ```{r}
 ggplot(data = bechdelSample, aes(x = domgross_2013))+ 
-  geom_histogram(fill="purple") + labs(x="2013 USD", y="Count", title="Domestic Gross Income adjusted for 2013 USD")
+  geom_histogram(fill="purple", color = "black") + labs(x="2013 USD", y="Count", title="Domestic Gross Income adjusted for 2013 USD")
 ```
 
 The domestic gross income, adjusted for 2013 USD, is very skewed to the right. The sample of 200 movies clearly demonstrates that there were over 50 cases that made over 20,000,000 USD in domestic gross income. There are also several cases that are outliers in comparison to the other cases and they are the ones that are visually represented on the right of the histogram. There are two cases, that did not have information on the domestic gross income, therefore this visualization is specifically showing data on 198 cases.
@@ -174,17 +182,51 @@ bechdelSample %>%
 ```
 
 
-### data visualizations
+### Data Visualizations
 
 ```{r}
 ggplot(data = bechdelSample, aes(x = intgross_2013))+ 
-  geom_histogram(fill="sienna")+ labs(x="2013 USD", y="Count", title="International Gross Income adjusted for 2013 USD")
+  geom_histogram(fill="sienna", color = "black")+ labs(x="2013 USD", y="Count", title="International Gross Income adjusted for 2013 USD")
 
 ```
 
 This visualization is showing the international gross income adjusted to 2013 USD for the sample of 200 movies. It is clear that the data is skewed to the right and this is highlighted by the outliers on the histogram which represent movies that made over 2,000,000,000 in international gross income when they were released. Note: there was one case that did not have information on international gross income, therefore this visualization is showing data on 199 cases. 
 
-##Variables 5-9
+# Variable 5: Test 
+
+
+```{r}
+testBechdel <- bechdelSample %>%
+  group_by(year) %>%
+  mutate(total = n()) %>%
+  group_by(year, binary) %>%
+  mutate(passNum = ifelse(binary == "PASS", n(), total-n() ) )
+```
+
+```{r}
+ggplot(testBechdel, aes(x= test))+
+  geom_bar(fill = "skyblue", color = "black") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title = "Frequencies of detailed categorizations of the Bechdel Test seen in the sample", x = "Category of test")
+```
+
+```{r}
+ggplot(testBechdel, aes(x= binary))+
+  geom_bar(fill = "lightpink", color = "black") +
+  labs(title = "Frequency of Passed and Failed Bechdel Tests", x = "Binary Classification of the Bechdel Test result")
+```
+
+The data visualizations above explore the `test` variable and the levels associated with the `test` categorical variable. The categories in the first graphic are explained below: 
+
+* `ok` = passes test
+* `dubious` = inconclusive result for reasons not explained by the dataset description. 
+* `men` = women only talk about men
+* `notalk` = women don't talk to each other
+* `nowomen` = fewer than two women
+
+The first graphic gives a rough idea that maybe more movies passed the bechdel test than the movies that failed the test. This misconception is cleared up by the second data graphic since the `binary` since it condenses the categories in `test` to either pass or fail labels for each of the movies. Hence, we see that more movies failed the bechdel test than pass it. 
+
+##Variables 6-10
 
 The "bechdelSample" data set we are using doesn't contain very many variables, so we are adding 5 new variables, three of which are categorical and two of which are quantitative. 
 

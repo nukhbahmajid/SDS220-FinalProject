@@ -54,7 +54,7 @@ ggplot(testBechdel, aes(x= test))+
 ```
 
 ```{r}
-ggplot(try1, aes(x= binary))+
+ggplot(testBechdel, aes(x= binary))+
   geom_bar(fill = "lightpink")
 ```
 
