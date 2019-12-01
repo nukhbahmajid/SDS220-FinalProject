@@ -18,7 +18,7 @@ library(oilabs)
 
 # Variable 1: Binary
 
-This can be either an expanatory or a response variable, and it is catergorical (PASS/FAIL).
+This can be either an explanatory or a response variable, and it is categorical (PASS/FAIL).
 
 ```{r}
 bechdelSample %>%
@@ -31,4 +31,4 @@ ggplot(data = bechdelSample,  aes(x = binary)) +
   geom_bar()+labs(x="Passing or Failing the Bechdel Test", title="Count of movies passing or failing the Bechdel test")
 ```
 
-Binary is a catergorical variable. The sample sizes of the pass/fail groups are shown above, as well as a bar plot comparing the number of movies passing and failing the Bechdel test. The summary statistics table and the data visualization both show that within this sample, more movies fail the Bechdel test than pass, 122 and 78, respectively. There are no missing smaples.
+Binary is a categorical variable. The sample sizes of the pass/fail groups are shown above, as well as a bar plot comparing the number of movies passing and failing the Bechdel test. The summary statistics table and the data visualization both show that within this sample, more movies fail the Bechdel test than pass, 122 and 78, respectively. There are no missing values. 

@@ -39,7 +39,7 @@ library(readr)
 
 ## Purpose 
 
-The Bechdel test is a meausre of representation of women in fiction, and is used a lot for movies. A movie passes the Bechdel test if two women talk to each other about something other than a man, and sometimes the requirement that the women are named is added as well. We want to see trends in gender representaion in movies across genre and decade and seeing if there is a relationship in how well the movies do financially and if they pass the Bechdel test.
+The Bechdel test is a measure of representation of women in fiction, and is used a lot for movies. A movie passes the Bechdel test if two women talk to each other about something other than a man, and sometimes the requirement that the women are named is added as well. We want to see trends in gender representation in movies across genre and decade and if there is a relationship in how well the movies do financially and if they pass the Bechdel test.
 
 Some questions we have:
 - Does the number of movies passing the Bechdel test change over time?
@@ -51,7 +51,7 @@ Some questions we have:
 
 ## The Data 
 
-The data we plan to use is from the Fivethirtyeight library on R, the dataset is called Bechdel. This dataset has 1794 cases, which are movies form 1970 to 2013. We plan to exclude all  movies released prior to 1990 and use a random sample of 200 movies from this dataset. The Bechdel dataset is made up of movies that Fivethirtyeight analyzed, using data they collected form other sources. We are assuming that these movies were randomly drawn from all movies that were released from that time speriod for the sake of our project, but we know that this assumption probably won't stand.  
+The data we plan to use is from the Fivethirtyeight library on R, the dataset is called Bechdel. This dataset has 1794 cases, which are movies form 1970 to 2013. We plan to exclude all  movies released prior to 1990 and use a random sample of 200 movies from this dataset. The Bechdel dataset is made up of movies that Fivethirtyeight analyzed, using data they collected form other sources. We are assuming that these movies were randomly drawn from all movies that were released from that time period for the sake of our project, but we know that this assumption probably won't stand.  
 
 
 ### Population  
