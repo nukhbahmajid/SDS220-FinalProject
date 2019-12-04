@@ -19,6 +19,10 @@ $H_0: \mu_{intgross2013-pass} - \mu_{intgross2013-fail} = 0$
 
 $H_A: \mu_{intgross2013-pass} - \mu_{intgross2013-fail} > 0$
 
+```{r}
+bechdelSampleNEW  <- read.csv(file = "bechdelSampleNEW.csv", header = TRUE)
+```
+
 
 ```{r}
 obs_diff_intgross_binary <- bechdelSampleNEW %>% 
