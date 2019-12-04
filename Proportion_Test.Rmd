@@ -1,0 +1,53 @@
+---
+title: "Proportion_Tests"
+author: "Madeleine Hickman"
+date: "12/1/2019"
+output: html_document
+---
+Here we are examining the difference in proportion for female- and male- directed movies that passed the Bechdel Test. 
+
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(oilabs)
+library(infer)
+```
+```{r}
+bechdelSampleNEW %>%
+  summarize(n = n(), 
+            count_female = sum(director == "female"),
+            p_hat =  count_female / n)
+```
+
+For our project we are assuming that the conditions for statistical inference are met, but we are aware that, in fact, our data set lacks the sufficient number of observations of movies with female directors. From our data set of 200 movies, only 17 had female directors; only 8.5% of the movies in our sample had female directors. 
+
+```{r}
+bechdelSampleNEW %>%
+  summarize(n = n(), 
+            count_female = sum(director == "female"),
+            p_hat =  count_female / n, 
+            se = sqrt(p_hat * (1 - p_hat) / n), 
+            me = qnorm(0.975) * se, 
+            lower_ci = p_hat - me, 
+            upper_ci = p_hat + me)
+```
+
+$H_0: \mu_{female} - \mu_{male} = 0$
+
+$H_A: \mu_{female} - \mu_{male} > 0$
+
+```{r}
+bechdelSampleNEW %>% 
+  group_by(director, binary) %>% 
+  summarize(count = n()) 
+```
+
+```{r}
+bechdelSampleNEW %>%
+  specify(binary ~ director, success = "PASS") %>%
+  calculate(stat = "diff in props", order = c( "female", "male"))
+```
+
+The difference in the proportion of movies with female directors that passed the bechdel test and movies with male directors that passed the Bechdel Test was 0.2167. Only 37.2% of the male-directed movies passed the Bechdel Test, whereas 58.8% of the female-directed movies passed the test. 
+
