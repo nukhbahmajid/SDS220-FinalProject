@@ -1,0 +1,60 @@
+---
+title: "BechdelTestBudgetConfidenceInterval"
+author: "Christian Madrigal"
+date: "11/30/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(tidyverse)
+library(infer)
+
+```
+
+```{r}
+completedata <- read.csv(file="bechdelSampleNEW.csv", header = TRUE)
+```
+
+```{r}
+set.seed(42)
+
+completedata <- as.tbl(completedata)
+
+boot_samp_1000 <- completedata %>% 
+  rep_sample_n(size = 200, reps = 1000, replace = TRUE)
+```
+
+
+
+
+```{r}
+boot_distrib_budget <- boot_samp_1000 %>% 
+  group_by(replicate) %>% 
+  summarize(boot_stat = mean(budget_2013))
+```
+
+```{r}
+boot_distrib_budget %>% 
+  summarize(mean = mean(boot_stat), 
+            se = sd(boot_stat), 
+            lower_ci = mean - (2 * se), 
+            upper_ci = mean + (2 * se))
+```
+
+```{r}
+ggplot(data = boot_samp_1000, aes(x = budget))+ 
+  geom_histogram(binwidth = 10000000, color = "white", fill = "steelblue") +labs(title="Bootstrap Distribution for Mean Budget for the 200 Cases ", x="2013 US Dollars", y="Count")
+
+```
+
+
+
+
+
