@@ -16,12 +16,12 @@ library(moderndive)
 ```
 
 ```{r}
-data(bechdelSample_bechdelSample_1_)
-glimpse(bechdelSample_bechdelSample_1_)
+data(bechdelSampleNEW)
+glimpse(bechdelSampleNEW)
 ```
 
 ```{r}
-model_intgross2013 <- lm(intgross ~ binary + budget_2013 + imdb_1, data = bechdelSample_bechdelSample_1_)
+model_intgross2013 <- lm(intgross ~ binary + budget_2013 + imdb_1, data = bechdelSampleNEW)
 
 get_regression_table(model_intgross2013, digits = 5) 
 ```
