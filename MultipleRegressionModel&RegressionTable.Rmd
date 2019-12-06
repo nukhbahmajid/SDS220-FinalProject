@@ -1,0 +1,28 @@
+---
+title: "BechelSampleMultipleRegression"
+author: "Christian Madrigal"
+date: "12/6/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(moderndive)
+```
+
+```{r}
+data(bechdelSample_bechdelSample_1_)
+glimpse(bechdelSample_bechdelSample_1_)
+```
+
+```{r}
+model_intgross2013 <- lm(intgross ~ binary + budget_2013 + imdb_1, data = bechdelSample_bechdelSample_1_)
+
+get_regression_table(model_intgross2013, digits = 5) 
+```
+
