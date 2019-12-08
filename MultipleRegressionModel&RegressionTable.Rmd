@@ -26,6 +26,11 @@ model_intgross2013 <- lm(intgross_2013 ~ binary + budget_2013 + imdb_1, data = b
 get_regression_table(model_intgross2013, digits = 5) 
 ```
 
+```{r}
+summary(model_intgross2013)
+```
+
+
 <<<<<<< HEAD
 Checking conditions
 
@@ -57,6 +62,11 @@ histogram of residuals
 
 WAS HAVING PROBLEMS
 
+```{r}
 ggplot(intgross_resid, aes(x= residual)) + 
-  geom_histogram(binwidth = 30, fill = "coral", color = "white") + 
+  geom_histogram(binwidth = 50000000, fill = "coral", color = "white") + 
   labs(x = "residuals")
+```
+
+
+
