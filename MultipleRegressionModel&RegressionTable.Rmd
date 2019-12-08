@@ -21,8 +21,12 @@ glimpse(bechdelSampleNEW)
 ```
 
 ```{r}
-model_intgross2013 <- lm(intgross ~ binary + budget_2013 + imdb_1, data = bechdelSampleNEW)
+model_intgross2013 <- lm(intgross_2013 ~ binary + budget_2013 + imdb_1, data = bechdelSampleNEW)
 
 get_regression_table(model_intgross2013, digits = 5) 
+```
+
+```{r}
+summary(model_intgross2013)
 ```
 
