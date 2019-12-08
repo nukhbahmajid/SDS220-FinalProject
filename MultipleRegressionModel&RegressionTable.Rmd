@@ -26,3 +26,37 @@ model_intgross2013 <- lm(intgross ~ binary + budget_2013 + imdb_1, data = bechde
 get_regression_table(model_intgross2013, digits = 5) 
 ```
 
+Checking conditions
+
+residuals vs budget
+
+
+```{r}
+intgross_resid <- get_regression_points(model_intgross2013)
+```
+
+```{r}
+ggplot(intgross_resid, aes(x= budget_2013, y = residual)) + 
+  geom_abline(slope = 0, intercept = 0, color = "red")+ 
+  geom_point() + 
+  labs(x = "budget")
+```
+
+
+residuals vs imdb score
+
+```{r}
+ggplot(intgross_resid, aes(x= imdb_1, y = residual)) + 
+  geom_abline(slope = 0, intercept = 0, color = "red")+ 
+  geom_point() + 
+  labs(x = "imdb score")
+```
+
+histogram of residuals
+
+```{r}
+ggplot(intgross_resid, aes(x= residual)) + 
+  geom_histogram(binwidth = 30, fill = "coral", color = "white") + 
+  labs(x = "residuals")
+```
+
