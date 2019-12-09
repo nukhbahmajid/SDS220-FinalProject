@@ -69,4 +69,13 @@ ggplot(intgross_resid, aes(x= residual)) +
 ```
 
 
+```{r}
+ggplot(intgross_resid, aes(x= binary, y = residual)) + 
+  geom_abline(slope = 0, intercept = 0, color = "red")+ 
+  geom_jitter() +
+  geom_point() + 
+  labs(x = "Binary", title = "Residuals for the binary: whether or not the movie passed the bechdel test")
+```
+
+
 
