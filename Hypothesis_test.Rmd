@@ -62,3 +62,19 @@ intgross_diff_under_null %>%
   get_pvalue(obs_stat = obs_diff_intgross_binary, direction = "both") 
 ```
 
+Box plot
+
+```{r}
+ggplot(data = bechdelSampleNEW, aes(x = binary, y = intgross_2013)) +
+  geom_boxplot(fill = "plum") + labs(title = "Comparison of International Gross Between Movies \n That Pass and Movies  That Fail the Bechdel Test", x = "Whether a Movie Passes or Fails the Bechdel Test", y = "International Gross \n ($US, Adjusted for Inflation in 2013  ")
+```
+
+
+side by side barplot
+
+
+```{r}
+ggplot(data = bechdelSampleNEW,  aes(x = binary, fill = director)) +
+  geom_bar(position = "dodge")
+```
+
