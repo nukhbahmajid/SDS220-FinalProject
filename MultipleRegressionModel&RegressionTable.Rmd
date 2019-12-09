@@ -69,4 +69,4 @@ ggplot(intgross_resid, aes(x= residual)) +
 ```
 
 
-
+$\widehat{INTGROSS}=-597,900,000 + 82,280,000(PASS) + 3.701(BUDGET) +  808,80,000(IMDB)$
