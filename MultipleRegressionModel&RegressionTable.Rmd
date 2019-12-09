@@ -16,12 +16,11 @@ library(moderndive)
 ```
 
 ```{r}
-data(bechdelSampleNEW)
-glimpse(bechdelSampleNEW)
+bechdelSampleNEW <- read.csv(file="bechdelSampleNEW.csv", header=TRUE)
 ```
 
 ```{r}
-model_intgross2013 <- lm(intgross_2013 ~ binary + budget_2013 + imdb_1, data = bechdelSampleNEW)
+model_intgross2013 <- lm(intgross_2013 ~ binary + budget_2013 + imdb.1+decade_code, data = bechdelSampleNEW)
 
 get_regression_table(model_intgross2013, digits = 5) 
 ```
@@ -34,12 +33,27 @@ summary(model_intgross2013)
 <<<<<<< HEAD
 Checking conditions
 
-residuals vs budget
+
 
 
 ```{r}
 intgross_resid <- get_regression_points(model_intgross2013)
 ```
+
+residual vs fitted values
+
+```{r}
+ggplot(intgross_resid, aes(x = intgross_2013_hat, y = residual))+ 
+  geom_point() + 
+  geom_abline(slope = 0, intercept = 0, color = "red") + 
+  labs(title = "Residual versus Fitted")
+
+
+plot(model_intgross2013, which=1)
+```
+
+
+residuals vs budget
 
 ```{r}
 ggplot(intgross_resid, aes(x= budget_2013, y = residual)) + 
@@ -52,7 +66,7 @@ ggplot(intgross_resid, aes(x= budget_2013, y = residual)) +
 residuals vs imdb score
 
 ```{r}
-ggplot(intgross_resid, aes(x= imdb_1, y = residual)) + 
+ggplot(intgross_resid, aes(x= imdb.1, y = residual)) + 
   geom_abline(slope = 0, intercept = 0, color = "red")+ 
   geom_point() + 
   labs(x = "imdb score")
@@ -60,12 +74,21 @@ ggplot(intgross_resid, aes(x= imdb_1, y = residual)) +
 
 histogram of residuals
 
-WAS HAVING PROBLEMS
 
 ```{r}
 ggplot(intgross_resid, aes(x= residual)) + 
   geom_histogram(binwidth = 50000000, fill = "coral", color = "white") + 
   labs(x = "residuals")
+```
+
+residuals vs binary
+
+```{r}
+ggplot(intgross_resid, aes(x= binary, y = residual)) + 
+  geom_abline(slope = 0, intercept = 0, color = "red")+ 
+  geom_jitter() +
+  geom_point() + 
+  labs(x = "Binary", title = "Residuals for the binary: whether or not the movie passed the bechdel test")
 ```
 
 
