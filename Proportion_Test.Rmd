@@ -53,3 +53,12 @@ bechdelSampleNEW %>%
 
 The difference in the proportion of movies with female directors that passed the bechdel test and movies with male directors that passed the Bechdel Test was 0.2167. Only 37.2% of the male-directed movies passed the Bechdel Test, whereas 58.8% of the female-directed movies passed the test. 
 
+```{r}
+bechdelSampleNEW %>%
+  specify(binary ~ director, success = "PASS") %>%
+  calculate(stat = "z", order = c( "female", "male"))
+
+1-pnorm(1.75)
+```
+
+The p-value is 0.0401, which indicates that this is a statistically significant difference in proportions. 
