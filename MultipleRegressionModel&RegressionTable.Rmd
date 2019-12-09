@@ -20,7 +20,7 @@ bechdelSampleNEW <- read.csv(file="bechdelSampleNEW.csv", header=TRUE)
 ```
 
 ```{r}
-model_intgross2013 <- lm(intgross_2013 ~ binary + budget_2013 + imdb.1, data = bechdelSampleNEW)
+model_intgross2013 <- lm(intgross_2013 ~ binary + budget_2013 + imdb.1+decade_code, data = bechdelSampleNEW)
 
 get_regression_table(model_intgross2013, digits = 5) 
 ```
@@ -47,6 +47,9 @@ ggplot(intgross_resid, aes(x = intgross_2013_hat, y = residual))+
   geom_point() + 
   geom_abline(slope = 0, intercept = 0, color = "red") + 
   labs(title = "Residual versus Fitted")
+
+
+plot(model_intgross2013, which=1)
 ```
 
 
