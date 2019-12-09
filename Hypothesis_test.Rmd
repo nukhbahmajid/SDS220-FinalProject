@@ -21,6 +21,7 @@ $H_A: \mu_{intgross2013-pass} - \mu_{intgross2013-fail} > 0$
 
 ```{r}
 bechdelSampleNEW  <- read.csv(file = "bechdelSampleNEW.csv", header = TRUE)
+
 ```
 
 
@@ -70,11 +71,6 @@ ggplot(data = bechdelSampleNEW, aes(x = binary, y = intgross_2013)) +
 ```
 
 
-side by side barplot
 
 
-```{r}
-ggplot(data = bechdelSampleNEW,  aes(x = binary, fill = director)) +
-  geom_bar(position = "dodge")
-```
 

@@ -20,6 +20,12 @@ bechdelSampleNEW %>%
   summarize(n = n(), 
             count_female = sum(director == "female"),
             p_hat =  count_female / n)
+bechdelSampleNEW <- bechdelSampleNEW %>%
+  mutate(typcat =  recode_factor(director, 
+                                 "male " = "male",
+                                 "male" = "male",
+                                 " male" = "male",
+                                 "female" = "female"))
 ```
 
 For our project we are assuming that the conditions for statistical inference are met, but we are aware that, in fact, our data set lacks the sufficient number of observations of movies with female directors. From our data set of 200 movies, only 17 had female directors; only 8.5% of the movies in our sample had female directors. 
@@ -62,3 +68,11 @@ bechdelSampleNEW %>%
 ```
 
 The p-value is 0.0401, which indicates that this is a statistically significant difference in proportions. 
+
+
+```{r}
+ggplot(data = bechdelSampleNEW,  aes(x = binary, fill = director)) +
+  geom_bar(position = "dodge") + labs (title = "Comparison of Movies that Pass and Fail the Bechdel Test, \n Split by Director's Gender", x = "Whether or not a Movie Passes the Bechdel Test")
+```
+
+
