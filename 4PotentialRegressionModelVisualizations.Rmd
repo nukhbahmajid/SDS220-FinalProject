@@ -1,0 +1,32 @@
+---
+title: "PotentialPlotofRegressionModel"
+author: "Christian Madrigal"
+date: "12/9/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+ggplot(data = bechdelSampleNEW, aes(x = budget_2013, y = intgross_2013, color = binary)) + 
+  geom_jitter() + 
+  labs(title = "International Gross Income and Movie Budget Both Adjusted 2013 USD") +
+  geom_smooth(method = "lm")
+```
+
+```{r}
+ggplot(data = bechdelSampleNEW, aes(x = imdb.1, y = intgross_2013, color = binary)) + 
+  geom_jitter() + 
+  labs(title = "International Gross Income Adjusted 2013 USD and IMDb Score") +
+  geom_smooth(method = "lm")
+```
+
+```{r}
+ggplot(data = bechdelSampleNEW, aes(x = decade_code, y = intgross_2013, color = binary)) + 
+  geom_jitter() + 
+  labs(title = "International Gross Income Adjusted 2013 USD and Decade") +
+  geom_smooth(method = "lm")
+```
+

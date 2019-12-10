@@ -29,6 +29,10 @@ get_regression_table(model_intgross2013, digits = 5)
 summary(model_intgross2013)
 ```
 
+```{r}
+aov(model_intgross2013)
+```
+
 
 <<<<<<< HEAD
 Checking conditions
@@ -92,4 +96,4 @@ ggplot(intgross_resid, aes(x= binary, y = residual)) +
 ```
 
 
-
+$\widehat{INTGROSS}=-597,900,000 + 82,280,000(PASS) + 3.701(BUDGET) +  808,80,000(IMDB) + 30,740,000(DECADECODE)$
