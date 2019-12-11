@@ -1,0 +1,28 @@
+---
+title: "PotentialPlotofRegressionModel"
+author: "Christian Madrigal"
+date: "12/9/2019"
+output: html_document
+---
+
+
+```{r}
+library(ggplot2)
+library(moderndive)
+```
+
+```{r,fig.height=3, fig.width=5, warning=FALSE, r,message=FALSE}
+ggplot(data = bechdelSampleNEW, aes(x = budget_2013, y = intgross_2013, color = binary)) + 
+  geom_jitter() + 
+  labs(title = "International Gross Income and Movie Budget \nBoth Adjusted 2013 USD",y="Internation Gross Income (2013 USD)",x="Movie Budget (2013 USD)") +
+  geom_parallel_slopes(method = "lm",se=FALSE)
+```
+
+```{r,fig.height=3, fig.width=5, warning=FALSE, r,message=FALSE}
+ggplot(data = bechdelSampleNEW, aes(x = imdb.1, y = intgross_2013, color = binary)) + 
+  geom_jitter() + 
+  labs(title = "International Gross Income \nAdjusted 2013 USD and IMDb Score", y="International Gross Income (2013 USD)", x="IMDb Score") +
+   geom_parallel_slopes(method = "lm", se=FALSE)
+```
+
+
