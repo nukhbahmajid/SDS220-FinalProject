@@ -17,10 +17,11 @@ library(moderndive)
 
 ```{r}
 bechdelSampleNEW <- read.csv(file="bechdelSampleNEW.csv", header=TRUE)
+#bechdelSampleNEW <- bechdelSampleNEW[-c(99,140,150,135),]
 ```
 
 ```{r}
-model_intgross2013 <- lm(intgross_2013 ~ binary + budget_2013 + imdb.1+decade_code, data = bechdelSampleNEW)
+model_intgross2013 <- lm(intgross_2013 ~ binary + budget_2013 + imdb.1, data = bechdelSampleNEW)
 
 get_regression_table(model_intgross2013, digits = 5) 
 ```
@@ -53,7 +54,7 @@ ggplot(intgross_resid, aes(x = intgross_2013_hat, y = residual))+
   labs(title = "Residual versus Fitted")
 
 
-plot(model_intgross2013, which=1)
+plot(model_intgross2013)
 ```
 
 
@@ -65,7 +66,7 @@ ggplot(intgross_resid, aes(x= budget_2013, y = residual)) +
   geom_point() + 
   labs(x = "budget")
 ```
-
+take inference w grain of salt bc it was a clear violator of homoskedasticity, but note the very small p value. plot is interesting -> lower budget films have less varaince in residuals. could make it categorical in the future
 
 residuals vs imdb score
 
@@ -76,6 +77,8 @@ ggplot(intgross_resid, aes(x= imdb.1, y = residual)) +
   labs(x = "imdb score")
 ```
 
+
+
 histogram of residuals
 
 
@@ -85,7 +88,7 @@ ggplot(intgross_resid, aes(x= residual)) +
   labs(x = "residuals")
 ```
 
-residuals vs binary
+residuals vs binary BOXPLOT
 
 ```{r}
 ggplot(intgross_resid, aes(x= binary, y = residual)) + 
