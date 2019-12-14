@@ -54,7 +54,7 @@ Once you have loaded in your data, You will create visualizations and summary st
 
 ### summary statistics 
 ```{r}
-bechdelSample<-bechdelSample
+bechdelSample<-read.csv(file="bechdelSampleNEW.csv", header = TRUE)
 ```
 
 
@@ -104,6 +104,7 @@ ggplot(data = bechdelSample, aes(x = intgross_2013))+
 ```
 
 This visualization is showing the international gross income adjusted to 2013 USD for the sample of 200 movies. It is clear that the data is skewed to the right and this is highlighted by the outliers on the histogram which represent movies that made over 2,000,000,000 in international gross income when they were released. Note: there was one case that did not have information on international gross income, therefore this visualization is showing data on 199 cases. 
+
 
 
 

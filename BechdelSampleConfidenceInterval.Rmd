@@ -23,6 +23,21 @@ completedata <- read.csv(file="bechdelSampleNEW.csv", header = TRUE)
 ```
 
 ```{r}
+completedata %>%
+  summarize(M_dom = mean(budget_2013, na.rm=TRUE), 
+            Mdn_dom = median(budget_2013, na.rm=TRUE),
+            q_1 = quantile(budget_2013, 0.25,na.rm=TRUE),
+            q_3 = quantile(budget_2013, 0.75, na.rm=TRUE),
+            sample_size = n())
+```
+
+```{r}
+ggplot(data = completedata, aes(x = budget_2013))+ 
+  geom_histogram(fill="purple") + labs(x="2013 USD", y="Count", title="Budget adjusted for 2013 USD")
+```
+
+
+```{r}
 set.seed(42)
 
 completedata <- as.tbl(completedata)
@@ -49,8 +64,8 @@ boot_distrib_budget %>%
 ```
 
 ```{r}
-ggplot(data = boot_samp_1000, aes(x = budget))+ 
-  geom_histogram(binwidth = 10000000, color = "white", fill = "steelblue") +labs(title="Bootstrap Distribution for Mean Budget for the 200 Cases ", x="2013 US Dollars", y="Count")
+ggplot(data = boot_distrib_budget, aes(x = boot_stat))+ 
+  geom_histogram(binwidth = 1000000, color = "white", fill = "steelblue") +labs(title="Bootstrap Distribution for Mean Budget", x="2013 US Dollars", y="Count")
 
 ```
 
