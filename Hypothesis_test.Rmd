@@ -13,6 +13,9 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(infer)
 library(readr)
+library(dplyr)
+library(ggplot2)
+library(oilabs)
 ```
 
 $H_0: \mu_{intgross2013-pass} - \mu_{intgross2013-fail} = 0$
@@ -32,6 +35,7 @@ obs_diff_intgross_binary <- bechdelSampleNEW %>%
 
 obs_diff_intgross_binary
 ```
+
 
 ```{r}
 set.seed(108)
@@ -70,7 +74,18 @@ ggplot(data = bechdelSampleNEW, aes(x = binary, y = intgross_2013)) +
   geom_boxplot(fill = "plum") + labs(title = "Comparison of International Gross Between \n Movies  That Pass and Movies  That Fail  \n the Bechdel Test", x = "Whether a Movie Passes or Fails the Bechdel Test", y = "International Gross \n (USD, Adjusted for Inflation in 2013  ") + theme(text = element_text(size = 15))
 ```
 
+summary statistics
 
+```{r}
+bechdelSampleNEW %>%
+  summarize(n = n(), 
+            count_pass = sum(binary == "PASS"),
+            count_fail = sum(binary == "FAIL"),
+            mean_int = mean(intgross_2013),
+            median_int = median(intgross_2013),
+            sd_int = sd(intgross_2013))
+```
 
+WHY CANT I GET STATS ON INTGROSS
 
 
