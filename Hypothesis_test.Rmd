@@ -83,8 +83,19 @@ bechdelSampleNEW %>%
             count_fail = sum(binary == "FAIL"),
             mean_int = mean(intgross_2013),
             median_int = median(intgross_2013),
-            sd_int = sd(intgross_2013))
+            sd_int = sd(intgross_2013) )
 ```
+
+
+```{r}
+bechdelSampleNEW %>%
+  group_by(binary) %>%
+  summarize(meanint = mean(intgross_2013, na.rm = TRUE))
+
+
+```
+
+
 
 WHY CANT I GET STATS ON INTGROSS
 
