@@ -64,7 +64,7 @@ visualize(intgross_diff_under_null) +
 
 ```{r}
 intgross_diff_under_null %>% 
-  get_pvalue(obs_stat = obs_diff_intgross_binary, direction = "both") 
+  get_pvalue(obs_stat = obs_diff_intgross_binary, direction = "greater") 
 ```
 
 Box plot
