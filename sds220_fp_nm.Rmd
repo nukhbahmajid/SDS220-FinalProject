@@ -67,3 +67,8 @@ The data visualizations above explore the `test` variable and the levels associa
 * `nowomen` = fewer than two women
 
 The first graphic gives a rough idea that maybe more movies passed the bechdel test than the movies that failed the test. This misconception is cleared up by the second data graphic since the `binary` since it condenses the categories in `test` to either pass or fail labels for each of the movies. Hence, we see that more movies failed the bechdel test than pass it. 
+
+```{r}
+bechdel2 <- read.csv(file="bechdelSampleNEW.csv", header = TRUE)
+```
+

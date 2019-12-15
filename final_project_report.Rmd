@@ -1,0 +1,355 @@
+---
+title: "SDS 220: Final Project Report"
+author: "Madeleine Hickman, Christian Madrigal, Nukhbah Majid, Annabel Shein"
+date: "12/15/2019"
+output:
+   html_document:
+    code_folding: "hide"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(tidyverse)
+library(infer)
+library(moderndive)
+```
+
+```{r, message=FALSE}
+bechdelSampleNEW  <- read_csv(file = "bechdelSampleNEW.csv")
+```
+
+# Abstract
+
+Our project was a detailed analysis of Female Representation in Hollywood Movies Using the Bechdel Test. The Bechdel Test is a test that evaluates whether a film portrays women in a way that is sexist. The following requirements need to be met in order to pass the Bechdel Test: (i) A work must feature at least two named women, (ii) Who talk to each other, and (iii) Their conversation subject must not be a man. We carried out multiple statistical tests to analyze different patterns in the data. These are the tests that we carried out: (a) Test for a difference in means of international gross of movies that passed the Bechdel Test vs. international gross of movies that did not pass the Bechdel Test (b) Test for a difference in proportions of movies that passed the Bechdel Test directed by females and movies that passed the Bechdel Test directed by males, and (c) Testing for predicted international gross using Multiple Regression analysis based on the following factors: (i) Pass (whether the movie passed the Bechdel Test or not), (ii) Budget, (iii) IMDb score, (iv) Decade Code. Generalizing to the fivethirtyeight sample from which we collected our data, our model suggests that passing the Bechdel Test is a significant predictor for international success of a movie. We are hesitant to generalize to all movies that were produced between 1990 and 2013 given that we don’t know specifics on the data collection methods used by fivethirtyeight. Overall, our model would not be used in real-world applications but for the purpose of this project we can make this conclusion without implying causality. 
+
+The generalizations from our analyses are explained in depth below: 
+
+<hr>
+
+# Introduction 
+
+Our project analyzes a subset of Hollywood movies (200 random cases) to assess trends relating to the Bechdel Test, which is a way of evaluating whether a film portrays women in a way that is sexist or characterized by gender stereotyping. To pass the Bechdel test, a work must feature at least two named women, these women must talk to each other, and their conversation must concern something other than a man. The goal of this project was to analyze whether passing the Bechdel test was a significant factor in a movie’s success.
+
+# Methods
+
+## ANALYSIS ONE
+
+### Question: What does the mean budget in 2013 United States Dollars (USD) look like for the movies in the sample at a 95% confidence level?
+
+### Assumptions:
+	To construct a confidence interval, we assumed that the data collected by fivethirtyeight was randomly sampled. Given that we randomly sampled 200 cases from the original sample provided from the original fivethirtyeight sample, we are sure that the confidence interval that we constructed is appropriate.
+
+### Data visualization 
+
+```{r echo=FALSE, fig.height=3, fig.width=5}
+ggplot(data = bechdelSampleNEW, aes(x = budget_2013))+ 
+  geom_histogram(fill="purple") + labs(x="2013 USD", y="Count", title="Budget for the 20 Cases Adjusted for 2013 USD")
+```
+
+### Summary statistics 
+
+Prior to constructing a 95% confidence interval with the bootstrap distribution we found some summary statistics of our random sample of 200 cases. It was demonstrated that the mean budget for the 200 cases was 58.8 million USD adjusted for inflation in 2013, whereas the median was 38.6 million 2013 USD. The fact that the mean was greater than the median once confirmed that the distribution for budget of the 200 cases is right skewed. 
+
+Moving forward to construct our confidence interval we constructed a bootstrap distribution using the mean budget of every sample as the bootstrap statistics. We found that the bootstrap distribution mean budget was 59.1 million 2013 USD and the standard error provided by computer output was 4.3 million 2013 USD.
+
+<br> 
+
+## ANALYSIS TWO
+
+### Question: Do movies that pass the Bechdel Test have a higher international gross than movies that do not pass the Bechdel Test?
+
+
+### Assumptions:
+The CLT applies as there are more than 5 cases in each category and the data are randomly sampled. 
+
+### Null and alternative hypotheses:
+
+$Ho: \mu_{intgross\_pass} - \mu_{intgross\_fail} = 0$
+
+$Ha: \mu_{intgross\_pass} - \mu_{intgross\_fail} > 0$
+
+### Data visualization 
+
+```{r echo = FALSE}
+ggplot(data = bechdelSampleNEW, aes(x = binary, y = intgross_2013)) +
+  geom_boxplot(fill = "plum") + labs(title = "Comparison of International Gross Between \n Movies  That Pass and Movies  That Fail  \n the Bechdel Test", x = "Whether a Movie Passes or Fails the Bechdel Test", y = "International Gross \n (USD, Adjusted for Inflation in 2013  ") + theme(text = element_text(size = 15))
+
+```
+
+### Summary statistics
+
+The mean international gross for movies that passed the Bechdel Test was 154,830,758 USD and the mean international gross for movies that failed the Bechdel Test was 191,586,803 USD. All mentions of USD are adjusted for inflation in 2013. The difference in mean international gross for movies that passed and failed the Bechdel Test was 2,427,075 USD. We also found that in the sample size of 200, 78 movies passed the Bechdel Test and 122 movies failed.
+
+<hr>
+
+## ANALYSIS THREE
+
+### Question: Do a higher proportion of movies with female directors pass the Bechdel Test than movies with male directors? 
+
+
+### Assumptions: For this test we are assuming that the data comes from a random sample. We are also assuming that the conditions for statistical inference are met, but we are aware that, in actuality, our data set lacks the sufficient number of observations of movies with female directors (n = 30). Out of our data set of 200 movies, only 17 (8.5%) had female directors. 
+
+
+### Null and alternative hypotheses:
+
+$H_0: \mu_{female} - \mu_{male} = 0$
+
+$H_A: \mu_{female} - \mu_{male} > 0$
+
+
+### Data visualization:
+
+```{r echo = FALSE}
+ggplot(data = bechdelSampleNEW,  aes(x = binary, fill = director)) +
+  geom_bar(position = "dodge") + labs (title = "Comparison of Movies that Pass and Fail the \n Bechdel Test, Split by Director's Gender", x = "Whether or not a Movie Passes the Bechdel Test") + theme(text = element_text(size = 15))
+```
+
+### Summary statistics
+
+The difference in the proportion of female- and male- directed movies that passed the Bechdel Test is 0.217 with a p-value of 0.0401, meaning that the proportion of female-directed movies that passed the Bechdel Test is significantly higher than the proportion of male-directed movies that passed the Bechdel Test.
+
+<hr>
+
+## ANALYSIS FOUR
+
+### Question: Are whether or not a movie passes the Bechdel Test, the Budget of the movie adjusted for the 2013 USD, what decade it was released in, and the IMDb Score of the film good predictors of the international success of a movie in 2013 USD? More specifically, is whether or not a movie passes the Bechdel test a significant predictor? How effective is the model in predicting international success of a film when all of these variables are accounted for in the model?
+
+
+### Assumptions:
+
+
+### Null and alternative hypotheses
+Testing Individual Predictors:
+
+$\beta_i$ is the coefficient of predictor i
+
+Testing Budget: 
+$\beta_{budget}=0$
+$\beta_{budget}\neq 0$
+
+Testing IMDb Score: 
+$\beta_{imdb}=0$
+$\beta_{imdb}\neq 0$
+
+Testing for a Binary Predictor Bechdel Test: 
+$\beta_{pass}=0$
+$\beta_{pass}\neq 0$
+
+Testing for overall effectiveness of the model:
+$H_o$: Model is not effective
+$H_a$: Model is effective
+
+### Data visualization 
+
+# ADD DATA VISUALIZATION CODE HERE !!!!!!!!!!!!!!
+
+### Summary statistics
+
+# ADD SUMMARY STATS HERE !!!!!!!!!!!!!!
+
+<br> 
+
+<hr>
+
+# Results 
+
+You can actually run the statistical analyses in this section. Run the analyses, and describe the results in the same order as the methods were written.
+
+## Analysis  1
+
+```{r}
+set.seed(42)
+
+bechdelSampleNEW <- as.tbl(bechdelSampleNEW)
+
+boot_samp_1000 <- bechdelSampleNEW %>% 
+  rep_sample_n(size = 200, reps = 1000, replace = TRUE)
+```
+
+```{r}
+boot_distrib_budget <- boot_samp_1000 %>% 
+  group_by(replicate) %>% 
+  summarize(boot_stat = mean(budget_2013))
+```
+
+```{r  echo=FALSE}
+ggplot(data = boot_distrib_budget, aes(x = boot_stat))+ 
+  geom_histogram(binwidth = 1000000, color = "white", fill = "steelblue") +labs(title="Bootstrap Distribution for Mean Budget", x="2013 US Dollars", y="Count")
+
+```
+
+```{r}
+boot_distrib_budget %>% 
+  summarize(mean = mean(boot_stat), 
+            se = sd(boot_stat), 
+            lower_ci = mean - (2 * se), 
+            upper_ci = mean + (2 * se))
+```
+
+## Analysis 2
+
+```{r}
+obs_diff_intgross_binary <- bechdelSampleNEW %>% 
+  specify(intgross_2013 ~ binary) %>% 
+  calculate(stat = "diff in means", order = c("PASS", "FAIL"))
+
+obs_diff_intgross_binary
+```
+
+
+```{r}
+set.seed(108)
+
+intgross_in_null_world <- bechdelSampleNEW %>% 
+  specify(intgross_2013 ~ binary) %>% 
+  hypothesize(null = "independence") %>% 
+  generate(reps = 5000, type = "permute")
+```
+
+```{r}
+intgross_diff_under_null <- intgross_in_null_world %>% 
+  calculate(stat = "diff in means", order = c("PASS", "FAIL")) 
+
+intgross_diff_under_null %>% 
+  slice(1:5)
+```
+
+```{r}
+visualize(intgross_diff_under_null) +
+  shade_p_value(obs_stat = obs_diff_intgross_binary, direction = "both") + 
+  labs(x = "Difference in mean international gross for movies that pass or fail the Bechdel Test", y = "Count",
+       title = "Null distribution",
+      subtitle = "Actual difference observed in the data is marked in red")
+```
+
+```{r}
+intgross_diff_under_null %>% 
+  get_pvalue(obs_stat = obs_diff_intgross_binary, direction = "greater") 
+```
+
+The observed statistic of the difference in means was first calculated. A randomization distribution using 500 randomization samples was constructed, assuming that the null hypothesis that there was no difference in mean international gross between movies that pass the Bechdel Test and movies that fail was true. The difference in means was then calculated using the randomization distribution. As can be seen in the null distribution of the difference in means, the data is centered around 0, as expected when using a randomization distribution. The observed statistic is visible with the red line on the distribution. Using the calculated differences in means, a p value of 0.452 was calculated. 
+
+## Analysis  3
+
+```{r}
+bechdelSampleNEW %>%
+  summarize(n = n(), 
+            count_female = sum(director == "female"),
+            p_hat =  count_female / n)
+bechdelSampleNEW <- bechdelSampleNEW %>%
+  mutate(typcat =  recode_factor(director, 
+                                 "male " = "male",
+                                 "male" = "male",
+                                 " male" = "male",
+                                 "female" = "female"))
+```
+
+```{r}
+bechdelSampleNEW %>%
+  summarize(n = n(), 
+            count_female = sum(director == "female"),
+            p_hat =  count_female / n, 
+            se = sqrt(p_hat * (1 - p_hat) / n), 
+            me = qnorm(0.975) * se, 
+            lower_ci = p_hat - me, 
+            upper_ci = p_hat + me)
+```
+
+$H_0: \mu_{female} - \mu_{male} = 0$
+
+$H_A: \mu_{female} - \mu_{male} > 0$
+
+```{r}
+bechdelSampleNEW %>% 
+  group_by(director, binary) %>% 
+  summarize(count = n()) 
+```
+
+
+```{r}
+bechdelSampleNEW %>%
+  specify(binary ~ director, success = "PASS") %>%
+  calculate(stat = "diff in props", order = c( "female", "male"))
+```
+
+The difference in the proportion of movies with female directors that passed the bechdel test and movies with male directors that passed the Bechdel Test was 0.2167. Only 37.2% of the male-directed movies passed the Bechdel Test, whereas 58.8% of the female-directed movies passed the test. 
+
+```{r}
+bechdelSampleNEW %>%
+  specify(binary ~ director, success = "PASS") %>%
+  calculate(stat = "z", order = c( "female", "male"))
+
+1-pnorm(1.75)
+```
+
+The p-value is 0.0401, which indicates that this is a statistically significant difference in proportions. 
+
+## Analysis  4
+
+# MULTIPLE REG STUFF HERE 
+
+
+<hr>
+
+
+# Discussion  - EVERYONE put your own interpretations and Christian will edit it and tie it all together
+## Implications 
+
+Write these in the same order as in Methods and Results
+	
+
+For each question touch on some of the following:
+
+* What do the results mean? Why do we think we saw these results?
+
+* Why do we care about these results?
+
+* Were there any surprises?
+
+* How do the results compare to what is seen in the literature? ^[Strauss, Valerie. _What the numbers really tell us about America's public schools_. Washington Post, March 2017.  _https://www.washingtonpost.com/news/answer-sheet/wp/2017/03/06/what-the-numbers-really-tell-us-about-americas-public-schools/?noredirect=on&utm_term=.d9a5b415678d]
+
+Difference in means
+A p-value of 0.459 was calculated for the hypothesis test for a difference in means. At a 5% significance value, we failed to reject the null hypothesis that there was no difference in mean international gross between movies that pass the Bechdel Test and movies that fail. Therefore, we had no significant evidence to show that movies that pass the Bechdel test have a higher international gross. We were surprised by these results, as we expected movies that pass the Bechdel Test to be more successful than those that don’t. 	WHY We think that this might not be the case because unfortunately movies and media in general tend to sexualize and stereotype women, given current societal norms. Movie directors and movie studies don’t prioritize portraying women in accurate ways, and stereotypical portrayals are easily digestible by the public.
+
+Difference in Proportions:
+
+
+Multiple Regression:
+Results indicate that all predictors, passing the Bechdel Test, budget of the film in 2013 USD, and IMDb Score, are all significant at the 5% level. It was important to see that the Bechdel Test is quite significant in determining the overall international success of a movie in our model, which is once again only reflective of the fivethirtyeight dataset. 
+
+
+## Limitations
+
+The dataset we used was put together by fivethirtyeight. Their data was collected using two websites: BechdelTest.com and The-Numbers.com. The data on whether or not the movies passed the Bechdel Test was collected by moviegoers who analyze films and post their results on BechdelTest.com. The financial information for the films was found using The-Numbers.com, which inventories financial information for about 4,500 films. The movies present in the dataset are the movies that had information available on both of these websites. Since this was an observational study, causality cannot be established. As the movies were not randomly selected, we cannot generalize to the entire population of popular Hollywood movies made between 1990 and 2013, but since we took a random sample of our original dataset we can generalize to the movies present in it. 
+
+One limitation in our analysis was in the proportion test. In our random sample of 200 cases, on 17 of them had female directors. For the CLT to apply, a sample of at least 30 is necessary, so our sample of 17 did not reach the minimum amount needed. However, in conducting the proportion test we assumed the CLT applied. As the variable “gender” was classified as categorical, we could not see if it was normally distributed. As we can not be sure if the CLT really applies to this test, we cannot generalize to the larger population as we cannot be sure that the mean of our sample will be approximately equal to that of the population. 
+
+Another limitation was in the multiple regression analysis. As can be seen in the graphs below, there are numerous outliers in both the residual versus fitted plot and the residual plots for each variable. Homoscedasticity is also violated in the residual versus fitted plot, and there is not an equal variance of the residuals. As can be seen in the histogram of residuals, there is somewhat of a right skew due to multiple outliers and much larger values present in the dataset. We attempted to make the conditions be met by both adding a variable into our model and removing some of the largest outliers. We added the variable “decade.code” which showed which decade the movie was made in. This did not change our residual graphs very much, and was an insignificant predictor with a p value of 0.2 so we removed this variable. We then removed the four biggest outliers present in our random sample of 200 cases, but it still left the residual graphs looking heteroscedastic and did not make much of a visual difference in the other violated conditions, so the outliers were added back into the dataset. As the conditions for multiple regression were violated, our multiple regression model cannot be used to  draw any conclusions or make associations. For the purpose of this project we proceeded with our analysis even though the conditions were not met.What can be seen in the residual versus budget plot is that higher budget movies had much more variability in success than those with a lower budget. Some future steps that could be taken to improve this model would be to include more variables, which could be done by finding more useful information, such as if a big star was in the movie, or by including variables that we could not use at this time, such as “genre” as there were four possible levels. By making each separate genre into a binary categorical variable, it could be included in the model.  
+
+The Bechdel Test itself represents a limitation in understanding whether a movie portrays women in a way that is sexist. The Bechdel Test does not take into account whether the conversation the two named women have enforces gender stereotypes, or in the case of movies like Gravity, which is dominated by Sandra Bullock, but she doesn’t speak to another woman. The Bechdel Test is not a model of whether the film is modeling gender equality, if women are integrated well into the film, or if the female characters are well written and play important parts in the plot. Though the Bechdel Test has many limitations, it is the best current test for gender equality in cinema. More criteria, such as the content of the conversation or screentime of women could be added to the Bechdel Test in the future. 
+
+## What do you still wonder?
+
+
+<hr>
+
+# Conclusions
+
+Through our statistical analysis of our 200-sample dataset, we found evidence that supports that idea that The Bechdel Test is a significant predictor of the financial success of a movie. We also found that there is a significant difference in the proportions of male-directed and female-directed movies that passed the Bechdel Test, with female-directed movies having a higher proportion of passing scores. The model we used for multiple regression was found to be effective at predicting the success of a movie based on their Bechdel Test result, budget, and IMDb score. We also found that the decade the movie was produced in did not seem to greatly impact the likelihood that the movie would pass the Bechdel Test. 
+
+I want to add more once we are nearly done so I can make sure I’ve hit everything that’s important to our project!
+
+<hr>
+
+#  Citations
+
+
+
+
+
