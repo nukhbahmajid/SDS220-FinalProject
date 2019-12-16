@@ -160,7 +160,6 @@ $H_a$: Model is effective
 
 # Results 
 
-You can actually run the statistical analyses in this section. Run the analyses, and describe the results in the same order as the methods were written.
 
 ## Analysis  1
 

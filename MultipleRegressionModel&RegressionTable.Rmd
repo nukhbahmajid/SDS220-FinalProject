@@ -85,7 +85,7 @@ histogram of residuals
 ```{r}
 ggplot(intgross_resid, aes(x= residual)) + 
   geom_histogram(binwidth = 50000000, fill = "coral", color = "white") + 
-  labs(x = "residuals")
+  labs(x = "residuals") + labs(title = "Histogram of Residuals")
 ```
 
 residuals vs binary BOXPLOT
