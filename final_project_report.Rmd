@@ -43,11 +43,12 @@ Our project analyzes a subset of Hollywood movies (200 random cases) to assess t
 ### Question: What does the mean budget in 2013 United States Dollars (USD) look like for the movies in the sample at a 95% confidence level?
 
 ### Assumptions:
-	To construct a confidence interval, we assumed that the data collected by fivethirtyeight was randomly sampled. Given that we randomly sampled 200 cases from the original sample provided from the original fivethirtyeight sample, we are sure that the confidence interval that we constructed is appropriate.
+
+To construct a confidence interval, we assumed that the data collected by fivethirtyeight was randomly sampled. Given that we randomly sampled 200 cases from the original sample provided from the original fivethirtyeight sample, we are sure that the confidence interval that we constructed is appropriate.
 
 ### Data visualization 
 
-```{r echo=FALSE, fig.height=3, fig.width=5}
+```{r, fig.height=3, fig.width=5}
 ggplot(data = bechdelSampleNEW, aes(x = budget_2013))+ 
   geom_histogram(fill="purple") + labs(x="2013 USD", y="Count", title="Budget for the 20 Cases Adjusted for 2013 USD")
 ```
@@ -76,7 +77,7 @@ $Ha: \mu_{intgross\_pass} - \mu_{intgross\_fail} > 0$
 
 ### Data visualization 
 
-```{r echo = FALSE}
+```{r}
 ggplot(data = bechdelSampleNEW, aes(x = binary, y = intgross_2013)) +
   geom_boxplot(fill = "plum") + labs(title = "Comparison of International Gross Between \n Movies  That Pass and Movies  That Fail  \n the Bechdel Test", x = "Whether a Movie Passes or Fails the Bechdel Test", y = "International Gross \n (USD, Adjusted for Inflation in 2013  ") + theme(text = element_text(size = 15))
 
@@ -105,7 +106,7 @@ $H_A: \mu_{female} - \mu_{male} > 0$
 
 ### Data visualization:
 
-```{r echo = FALSE}
+```{r}
 ggplot(data = bechdelSampleNEW,  aes(x = binary, fill = director)) +
   geom_bar(position = "dodge") + labs (title = "Comparison of Movies that Pass and Fail the \n Bechdel Test, Split by Director's Gender", x = "Whether or not a Movie Passes the Bechdel Test") + theme(text = element_text(size = 15))
 ```
@@ -178,7 +179,7 @@ boot_distrib_budget <- boot_samp_1000 %>%
   summarize(boot_stat = mean(budget_2013))
 ```
 
-```{r  echo=FALSE}
+```{r}
 ggplot(data = boot_distrib_budget, aes(x = boot_stat))+ 
   geom_histogram(binwidth = 1000000, color = "white", fill = "steelblue") +labs(title="Bootstrap Distribution for Mean Budget", x="2013 US Dollars", y="Count")
 
