@@ -1,5 +1,5 @@
 ---
-title: "SDS 220: Final Project Report"
+title: "Analyzing Female Representation in Hollywood Movies Using the Bechdel Test"
 author: "Madeleine Hickman, Christian Madrigal, Nukhbah Majid, Annabel Shein"
 date: "12/15/2019"
 output:
@@ -24,13 +24,20 @@ library(moderndive)
 bechdelSampleNEW  <- read_csv(file = "bechdelSampleNEW.csv")
 ```
 
+
+<CENTER>
+![](image1.png){width=100%}
+*The Bechdel Test comic strip*
+</CENTER>
+
+
 # Abstract
 
   Our project was a detailed analysis of female representation in Hollywood movies using the Bechdel Test. The Bechdel Test is an assessment that evaluates whether a film portrays women in a way that is biased. The following requirements need to be met in order to pass the Bechdel Test: 
 (i) A work must feature at least two named women, 
 (ii) Who talk to each other, and 
 (iii) Their conversation subject must not be a man. 
-  We carried out multiple statistical tests to analyze different patterns in the data. These are the tests that we carried out: (a) Test for a difference in means of international gross of movies that passed the Bechdel Test vs. international gross of movies that did not pass the Bechdel Test (b) Test for a difference in proportions of movies that passed the Bechdel Test directed by females and movies that passed the Bechdel Test directed by males, and (c) Testing for predicted international gross using Multiple Regression analysis based on the following factors: (i) Pass (whether the movie passed the Bechdel Test or not), (ii) Budget, (iii) IMDb score. Generalizing to the fivethirtyeight sample from which we collected our data, our model suggests that passing the Bechdel Test is a significant predictor for the international success of a movie. We are hesitant to generalize to all movies that were produced between 1990 and 2013 given that the  data was not, in actuality, collected randomly, because the fivethirtyeight data was taken from two datasets, one of which was crowdsourced, and the other of which we do not know their data-collection method . Overall, our model would not be used in real-world applications as the necessary conditions were not met, but for the purpose of this project we can make conclusions without implying causality. 
+  We carried out multiple statistical tests to analyze different patterns in the data. These are the tests that we carried out: (a) Test for a difference in means of international gross of movies that passed the Bechdel Test vs. international gross of movies that did not pass the Bechdel Test (b) Test for a difference in proportions of movies that passed the Bechdel Test directed by females and movies that passed the Bechdel Test directed by males, and (c) Testing for predicted international gross using Multiple Regression analysis based on the following factors: (i) Pass (whether the movie passed the Bechdel Test or not), (ii) Budget, (iii) IMDb score. Generalizing to the fivethirtyeight sample from which we collected our data, our model suggests that passing the Bechdel Test is a significant predictor for the international success of a movie. We are hesitant to generalize to all movies that were produced between 1990 and 2013 given that the  data was not, in actuality, collected randomly, because the fivethirtyeight[^1] data was taken from two datasets, one of which was crowdsourced, and the other of which we do not know their data-collection method . Overall, our model would not be used in real-world applications as the necessary conditions were not met, but for the purpose of this project we can make conclusions without implying causality. 
 
 The generalizations from our analyses are explained in depth below.
 
@@ -156,6 +163,10 @@ $H_a$: Model is effective
 
 
 ### Summary statistics
+
+```{r}
+model_intgross2013 <- lm(intgross_2013 ~ binary + budget_2013 + imdb_1, data = bechdelSampleNEW)
+```
 
 ```{r}
 summary(model_intgross2013)
@@ -302,10 +313,9 @@ bechdelSampleNEW %>%
 
 ## Analysis  4
 
-# MULTIPLE REG STUFF HERE 
 
 ```{r echo=FALSE}
-model_intgross2013 <- lm(intgross_2013 ~ binary + budget_2013 + imdb.1, data = bechdelSampleNEW)
+model_intgross2013 <- lm(intgross_2013 ~ binary + budget_2013 + imdb_1, data = bechdelSampleNEW)
 
 get_regression_table(model_intgross2013, digits = 5) 
 ```
@@ -324,7 +334,8 @@ aov(model_intgross2013)
 <hr>
 
 
-# Discussion  - EVERYONE put your own interpretations and Christian will edit it and tie it all together
+# Discussion
+
 ## Implications 
 
 
@@ -378,7 +389,8 @@ Through our statistical analysis of our 200-sample dataset, we found evidence th
 
 #  Citations
 
-Hickey, Walt. “The Dollar-And-Cents Case Against Hollywood's Exclusion of Women.” FiveThirtyEight, FiveThirtyEight, 1 Apr. 2014, fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/.
+[^1]: [Hickey, Walt. “The Dollar-And-Cents Case Against Hollywood's Exclusion of Women.” FiveThirtyEight, FiveThirtyEight, 1 Apr. 2014:](fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/) 
+
 
 
 
