@@ -358,7 +358,7 @@ aov(model_intgross2013)
   Another limitation was in the multiple regression analysis. As can be seen in the graphs below, there are numerous outliers in both the residual versus fitted plot and the residual plots for each variable. Homoscedasticity is also violated in the residual versus fitted plot, and there is not an equal variance of the residuals. As can be seen in the histogram of residuals, there is somewhat of a right skew due to multiple outliers and much larger values present in the dataset. We attempted to make the conditions be met by both adding a variable into our model and removing some of the largest outliers. We added the variable “decade.code” which showed which decade the movie was made in. This did not change our residual graphs very much, and was an insignificant predictor with a p-value of 0.2 so we removed this variable. We then removed the four biggest outliers present in our random sample of 200 cases, but it still left the residual graphs looking heteroscedastic and did not make much of a visual difference in the other violated conditions, so the outliers were added back into the dataset. As the conditions for multiple regression were violated, our multiple regression model cannot be used to  draw any conclusions or make associations. For the purpose of this project we proceeded with our analysis even though the conditions were not met. What can be seen in the residual versus budget plot is that higher budget movies had much more variability in success than those with a lower budget. Some future steps that could be taken to improve this model would be to include more variables, which could be done by finding more useful information, such as if a big star was in the movie, or by including variables that we could not use at this time, such as “genre” as there were four possible levels. By making each separate genre into a binary categorical variable, it could be included in the model.  
   
   
-Checking Conditions:
+###Checking Conditions:
 
 ```{r}
 intgross_resid <- get_regression_points(model_intgross2013)
@@ -368,16 +368,13 @@ intgross_resid <- get_regression_points(model_intgross2013)
 ggplot(intgross_resid, aes(x = intgross_2013_hat, y = residual))+ 
   geom_point() + 
   geom_abline(slope = 0, intercept = 0, color = "red") + 
-  labs(title = "Residual versus Fitted")
-
-
-plot(model_intgross2013)
+  labs(title = "Residual versus Fitted", x = "Fitted Values", y = "Residuals")
 ```
 
 ```{r}
-ggplot(intgross_resid, aes(x= residual)) + 
-  geom_histogram(binwidth = 50000000, fill = "coral", color = "white") + 
-  labs(x = "residuals") + labs(title = "Histogram of Residuals")
+ ggplot(intgross_resid, aes(x= residual)) +
+ geom_histogram(binwidth = 50000000, fill = "coral", color = "white") +
+ labs(x = "residuals") + labs(title = "Histogram of Residuals")
 ```
 
   The Bechdel Test itself represents a limitation in understanding whether a movie portrays women in a way that is biased. The Bechdel Test does not take into account whether the conversation the two named women have enforces gender stereotypes, or in the case of movies like Gravity, which is dominated by Sandra Bullock, but she doesn’t speak to another woman. The Bechdel Test is not a model of whether the film is modeling gender equality, if women are integrated well into the film, or if the female characters are well written and play important parts in the plot. Though the Bechdel Test has many limitations, it is the best current test for gender equality in cinema. More criteria, such as the content of the conversation or screentime of women could be added to the Bechdel Test in the future.
@@ -388,7 +385,7 @@ ggplot(intgross_resid, aes(x= residual)) +
 
 # Conclusions
 
-Through our statistical analysis of our 200-sample dataset, we found evidence that supports that idea that The Bechdel Test is a significant predictor of the financial success of a movie. We also found that there is a significant difference in the proportions of male-directed and female-directed movies that passed the Bechdel Test, with female-directed movies having a higher proportion of passing scores. The model we used for multiple regression was found to be effective at predicting the success of a movie based on their Bechdel Test result, budget, and IMDb score. We also found that the decade the movie was produced in did not seem to greatly impact the likelihood that the movie would pass the Bechdel Test. 
+Through our statistical analysis of our 200-sample dataset, we found evidence that supports that idea that The Bechdel Test is a significant predictor of the financial success of a movie. We also found that there is a significant difference in the proportions of male-directed and female-directed movies that passed the Bechdel Test, with female-directed movies having a higher proportion of passing scores. The model we used for multiple regression was found to be effective at predicting the success of a movie based on their Bechdel Test result, budget, and IMDb score.
 
 
 <hr>
