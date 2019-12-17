@@ -62,7 +62,7 @@ To construct a confidence interval, we assumed that the data collected by fiveth
 
 ```{r, fig.height=3, fig.width=5}
 ggplot(data = bechdelSampleNEW, aes(x = budget_2013))+ 
-  geom_histogram(fill="purple") + labs(x="2013 USD", y="Count", title="Budget for the 20 Cases Adjusted for 2013 USD")
+  geom_histogram(fill="purple") + labs(x="2013 USD", y="Count", title="Budget for the 200 Cases Adjusted for 2013 USD")
 ```
 
 ### Summary statistics 
